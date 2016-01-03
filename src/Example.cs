@@ -29,7 +29,7 @@ namespace MyPlugin
          // plugin to Final Frontier
          this.adapter.Plugin();
 
-         // optional: log the version fo Final Frontier
+         // optional: log the version of Final Frontier
          Debug.Log("Final Frontier version: "+adapter.GetVersion());
 
          if (this.adapter.IsInstalled()) // optional test
@@ -51,7 +51,7 @@ namespace MyPlugin
          GameEvents.OnCrewmemberHired.Add(this.OnCrewmemberHired);
          
          // example usage:
-         // everytime a vessel is recovered, we want to log some statistical data for the crew
+         // everytime a vessel is recovered, we want to log some statistical data of the crew;
          // see callback below
          GameEvents.onVesselRecovered.Add(this.OnVesselRecovered);
       }
