@@ -16,6 +16,7 @@ namespace MyPlugin
       // methods of the ExternalInterface
       private MethodInfo methodGetVersion = null;
       private MethodInfo methodRegisterRibbon = null;
+      private MethodInfo methodRegisterCustomRibbon = null;
       private MethodInfo methodAwardRibbonToKerbalByCode = null;
       private MethodInfo methodAwardRibbonToKerbalByRibbon = null;
       private MethodInfo methodAwardRibbonToKerbalsByCode = null;
@@ -65,7 +66,8 @@ namespace MyPlugin
       {
          methodGetVersion = GetMethod(type, "GetVersion");
          methodRegisterRibbon = GetMethod(type, "RegisterRibbon");
-         methodAwardRibbonToKerbalByCode = GetMethod(type,"AwardRibbonToKerbal", new Type[] { typeof(String), typeof(ProtoCrewMember) });
+         methodRegisterCustomRibbon = GetMethod(type, "RegisterCustomRibbon");
+         methodAwardRibbonToKerbalByCode = GetMethod(type, "AwardRibbonToKerbal", new Type[] { typeof(String), typeof(ProtoCrewMember) });
          methodAwardRibbonToKerbalByRibbon = GetMethod(type,"AwardRibbonToKerbal", new Type[] { typeof(object), typeof(ProtoCrewMember) });
          methodAwardRibbonToKerbalsByCode = GetMethod(type, "AwardRibbonToKerbals", new Type[] { typeof(String), typeof(ProtoCrewMember[]) });
          methodAwardRibbonToKerbalsByRibbon = GetMethod(type, "AwardRibbonToKerbals", new Type[] { typeof(object), typeof(ProtoCrewMember[]) });
@@ -174,6 +176,36 @@ namespace MyPlugin
             catch(Exception e)
             {
                LogFailedMethodAccess("RegisterRibbon", e);
+            }
+         }
+         return null;
+      }
+
+      /**
+       * Register a custom ribbon. 
+       * Important: Do not register the same id twice!
+       * Parameter:
+       *   id : unique id for ribbon (valid range start with 1001).
+       *   pathToRibbonTexture: path to ribbon png file relative to GameData folder (without suffix).
+       *   nmae: name of the ribbon
+       *   description: description text
+       *   prestige: prestige (currently just used for ribbon ordering)
+       * Returns:
+       *   Registered custom ribbon or null, if failed
+       * Throws:
+       *   ArgumentException, if id was already registered
+       */
+      public object RegisterCustomRibbon(int id, String pathToRibbonTexture, String name, String description = "", int prestige = DEFAULT_PRESTIGE)
+      {
+         if (IsInstalled() && methodRegisterCustomRibbon != null)
+         {
+            try
+            {
+               return methodRegisterCustomRibbon.Invoke(instanceExternalInterface, new object[] { id, pathToRibbonTexture, name, description, prestige });
+            }
+            catch (Exception e)
+            {
+               LogFailedMethodAccess("RegisterCustomRibbon", e);
             }
          }
          return null;

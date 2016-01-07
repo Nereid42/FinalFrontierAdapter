@@ -13,6 +13,8 @@ namespace MyPlugin
 
       // UNIQUE (!) ribbon code
       private const String RIBBON_CODE = "KSP";
+      // UNIQUE (!) custom ribbon id (used for custom ribbons only)
+      private const int RIBBON_ID = 1001;
 
       private FinalFrontierAdapter adapter;
 
@@ -43,6 +45,14 @@ namespace MyPlugin
                "Space Program Ribbon",                                             // name of ribbon
                "Awarded to every applicant that joines the kerbal space program"   // description (optional)
               );
+            //
+            // this is an example for a custom ribbon (i.e. the player can award manually)
+            this.adapter.RegisterCustomRibbon(
+                           RIBBON_ID,                                              // unique ribbon code
+                           RIBBON_BASE + "Custom1001",                             // path to ribbon png file
+                           "Custom Ribbon 1001",                                   // name of ribbon
+                           "Awarded manually by the player"                        // description (optional)
+                          );
          }
 
          // example usage:
