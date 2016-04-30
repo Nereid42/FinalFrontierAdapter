@@ -69,6 +69,9 @@ namespace MyPlugin
       // callback for new crew member hired
       private void OnCrewmemberHired(ProtoCrewMember kerbal, int value)
       {
+         // its better to be safe than sorry
+         if (kerbal == null) return;
+         //
          Debug.Log("applicant " + kerbal.name+ " will receive the KSP ribbon");
          //
          // now we want to award the KSP ribbon
@@ -78,7 +81,7 @@ namespace MyPlugin
       }
 
       // callback for vessel recovered
-      private void OnVesselRecovered(ProtoVessel vessel)
+      private void OnVesselRecovered(ProtoVessel vessel, bool flag)
       {
          // its better to be safe than sorry
          if (vessel == null) return;
