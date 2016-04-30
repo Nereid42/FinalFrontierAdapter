@@ -187,7 +187,7 @@ namespace MyPlugin
        * Parameter:
        *   id : unique id for ribbon (valid range start with 1001).
        *   pathToRibbonTexture: path to ribbon png file relative to GameData folder (without suffix).
-       *   nmae: name of the ribbon
+       *   name: name of the ribbon
        *   description: description text
        *   prestige: prestige (currently just used for ribbon ordering)
        * Returns:
