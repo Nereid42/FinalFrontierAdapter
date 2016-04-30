@@ -9,10 +9,10 @@ namespace MyPlugin
    class Example : MonoBehaviour
    {
       // place your ribbon png files (size 120x32 pixel) here...
-      private const String RIBBON_BASE = "MyPluginInGameData/Ribbons/";
+      private const string RIBBON_BASE = "MyPluginInGameData/Ribbons/";
 
       // UNIQUE (!) ribbon code
-      private const String RIBBON_CODE = "KSP";
+      private const string RIBBON_CODE = "KSP";
       // UNIQUE (!) custom ribbon id (used for custom ribbons only)
       private const int RIBBON_ID = 1001;
 
@@ -29,7 +29,7 @@ namespace MyPlugin
          // create the adapter
          this.adapter = new FinalFrontierAdapter();
          // plugin to Final Frontier
-         this.adapter.Plugin();
+         this.adapter.TryInstallPlugin();
 
          // optional: log the version of Final Frontier
          Debug.Log("Final Frontier version: "+adapter.GetVersion());
