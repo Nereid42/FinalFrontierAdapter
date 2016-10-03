@@ -21,6 +21,8 @@ namespace MyPlugin
       private MethodInfo methodAwardRibbonToKerbalByRibbon = null;
       private MethodInfo methodAwardRibbonToKerbalsByCode = null;
       private MethodInfo methodAwardRibbonToKerbalsByRibbon = null;
+      private MethodInfo methodRevokeRibbonFromKerbalByCode = null;
+      private MethodInfo methodRevokeRibbonFromKerbalByRibbon = null;
       private MethodInfo methodIsRibbonAwardedToKerbalByCode = null;
       private MethodInfo methodIsRibbonAwardedToKerbalByRibbon = null;
       private MethodInfo methodGetMissionsFlownForKerbal = null;
@@ -28,6 +30,11 @@ namespace MyPlugin
       private MethodInfo methodResearchForKerbal = null;
       private MethodInfo methodTotalMissionTimeForKerbal = null;
       private MethodInfo methodGetContractsCompletedForKerbal = null;
+
+      // Ranks
+      private MethodInfo methodRegisterRank = null;
+      private MethodInfo methodPromoteKerbal = null;
+      private MethodInfo methodAssignRankToKerbal = null;
 
       protected Type GetType(String name)
       {
@@ -67,10 +74,15 @@ namespace MyPlugin
          methodGetVersion = GetMethod(type, "GetVersion");
          methodRegisterRibbon = GetMethod(type, "RegisterRibbon");
          methodRegisterCustomRibbon = GetMethod(type, "RegisterCustomRibbon");
+         // award
          methodAwardRibbonToKerbalByCode = GetMethod(type, "AwardRibbonToKerbal", new Type[] { typeof(String), typeof(ProtoCrewMember) });
          methodAwardRibbonToKerbalByRibbon = GetMethod(type,"AwardRibbonToKerbal", new Type[] { typeof(object), typeof(ProtoCrewMember) });
          methodAwardRibbonToKerbalsByCode = GetMethod(type, "AwardRibbonToKerbals", new Type[] { typeof(String), typeof(ProtoCrewMember[]) });
          methodAwardRibbonToKerbalsByRibbon = GetMethod(type, "AwardRibbonToKerbals", new Type[] { typeof(object), typeof(ProtoCrewMember[]) });
+         // revoke
+         methodRevokeRibbonFromKerbalByCode = GetMethod(type, "RevokeRibbonFromKerbal", new Type[] { typeof(String), typeof(ProtoCrewMember) });
+         methodRevokeRibbonFromKerbalByRibbon = GetMethod(type, "RevokeRibbonFromKerbal", new Type[] { typeof(object), typeof(ProtoCrewMember) });
+         // misc
          methodIsRibbonAwardedToKerbalByCode = GetMethod(type, "IsRibbonAwardedToKerbal", new Type[] { typeof(String), typeof(ProtoCrewMember) });
          methodIsRibbonAwardedToKerbalByRibbon = GetMethod(type, "IsRibbonAwardedToKerbal", new Type[] { typeof(object), typeof(ProtoCrewMember) });
          methodGetMissionsFlownForKerbal = GetMethod(type, "GetMissionsFlownForKerbal");
@@ -78,6 +90,10 @@ namespace MyPlugin
          methodResearchForKerbal = GetMethod(type, "GetResearchForKerbal");
          methodTotalMissionTimeForKerbal = GetMethod(type, "GetTotalMissionTimeForKerbal");
          methodGetContractsCompletedForKerbal= GetMethod(type, "GetContractsCompletedForKerbal");
+         // ranks
+         methodRegisterRank = GetMethod(type, "RegisterRank", new Type[] { typeof(String), typeof(String) });
+         methodPromoteKerbal = GetMethod(type, "PromoteKerbal", new Type[] { typeof(ProtoCrewMember) });
+         methodAssignRankToKerbal = GetMethod(type, "AssignRankToKerbal", new Type[] { typeof(object), typeof(ProtoCrewMember) });
       }
 
       private void LogFailedMethodAccess(String name, Exception e)
