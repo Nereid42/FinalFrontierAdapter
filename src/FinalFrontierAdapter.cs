@@ -356,6 +356,49 @@ namespace MyPlugin
       }
 
       /**
+       * Revoke a ribbon from a kerbal. 
+       * Parameter:
+       *   ribbon: ribbon to be revoked
+       *   kerbal: kerbal that will lose the ribbon
+       */
+      public void RevokeRibbonFromKerbal(object ribbon, ProtoCrewMember kerbal)
+      {
+         if (IsInstalled() && methodRevokeRibbonFromKerbalByRibbon != null)
+         {
+            try
+            {
+               methodRevokeRibbonFromKerbalByRibbon.Invoke(instanceExternalInterface, new object[] { ribbon, kerbal });
+            }
+            catch (Exception e)
+            {
+               LogFailedMethodAccess("RevokeRibbonFromKerbal", e);
+            }
+         }
+      }
+
+      /**
+       * Revoke a ribbon from a kerbal. 
+       * Parameter:
+       *   code: code of the ribbon to be revoked
+       *   kerbal: kerbal that will lose the ribbon
+       */
+      public void RevokeRibbonFromKerbal(String code, ProtoCrewMember kerbal)
+      {
+         if (IsInstalled() && methodRevokeRibbonFromKerbalByCode != null)
+         {
+            try
+            {
+               methodRevokeRibbonFromKerbalByCode.Invoke(instanceExternalInterface, new object[] { code, kerbal });
+            }
+            catch (Exception e)
+            {
+               LogFailedMethodAccess("RevokeRibbonFromKerbal", e);
+            }
+         }
+      }
+
+
+      /**
        * Get the number of completed missions for a kerbal. 
        * Parameter
        *   kerbal: kerbal that we are interested in
